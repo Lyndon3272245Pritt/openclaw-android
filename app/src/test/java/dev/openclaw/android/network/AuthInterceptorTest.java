@@ -1,5 +1,6 @@
 package dev.openclaw.android.network;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,6 +31,12 @@ public class AuthInterceptorTest {
         client = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
                 .build();
+    }
+
+    // Shut down the mock server after each test to avoid resource leaks
+    @After
+    public void tearDown() throws IOException {
+        mockWebServer.shutdown();
     }
 
     @Test
@@ -79,5 +86,10 @@ public class AuthInterceptorTest {
     @Test
     public void updateToken_throwsOnNullToken() {
         assertThrows(IllegalArgumentException.class, () -> interceptor.updateToken(null));
+    }
+
+    @Test
+    public void updateToken_throwsOnEmptyToken() {
+        assertThrows(IllegalArgumentException.class, () -> interceptor.updateToken(""));
     }
 }
