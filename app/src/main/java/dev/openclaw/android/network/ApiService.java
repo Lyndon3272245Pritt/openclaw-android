@@ -51,6 +51,9 @@ public interface ApiService {
      *
      * Personal note: bumped default limit to 50 for search since I usually
      * want more results visible without extra pagination taps.
+     *
+     * Personal note: added a dedicated overload below with my preferred
+     * defaults (page=1, limit=50) so call sites don't need to repeat them.
      */
     @GET("entries/search")
     Call<ClawResponse<List<ClawEntry>>> searchEntries(
@@ -58,4 +61,13 @@ public interface ApiService {
             @Query("page") int page,
             @Query("limit") int limit
     );
+
+    /**
+     * Convenience overload: search from page 1 with my preferred limit of 50.
+     *
+     * @param query search keyword
+     * @return call wrapping the search results
+     */
+    @GET("entries/search?page=1&limit=50")
+    Call<ClawResponse<List<ClawEntry>>> searchEntries(@Query("q") String query);
 }
