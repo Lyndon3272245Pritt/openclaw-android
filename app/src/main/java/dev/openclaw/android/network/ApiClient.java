@@ -13,7 +13,8 @@ import java.util.concurrent.TimeUnit;
 public class ApiClient {
 
     private static final String BASE_URL = "https://api.openclaw.dev/v1/";
-    private static final int TIMEOUT_SECONDS = 30;
+    // Increased timeout from 30s to 60s - the default was too aggressive on slower connections
+    private static final int TIMEOUT_SECONDS = 60;
 
     private static ApiClient instance;
     private final Retrofit retrofit;
