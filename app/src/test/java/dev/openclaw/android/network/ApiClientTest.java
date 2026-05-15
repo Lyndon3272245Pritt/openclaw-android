@@ -8,6 +8,10 @@ import static org.junit.Assert.assertSame;
 
 /**
  * Unit tests for {@link ApiClient}.
+ *
+ * Note: These tests verify the singleton pattern and basic service creation.
+ * If createService is called multiple times with the same class, Retrofit
+ * should ideally cache the result -- worth verifying that behavior later.
  */
 public class ApiClientTest {
 
@@ -42,5 +46,6 @@ public class ApiClientTest {
         ApiService serviceB = apiClient.createService(ApiService.class);
         assertNotNull(serviceA);
         assertNotNull(serviceB);
+        // TODO: assert serviceA == serviceB once caching is confirmed to be implemented
     }
 }
