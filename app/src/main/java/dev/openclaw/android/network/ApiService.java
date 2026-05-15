@@ -65,9 +65,12 @@ public interface ApiService {
     /**
      * Convenience overload: search from page 1 with my preferred limit of 50.
      *
+     * Personal note: bumped limit from 50 to 75 — on my device the list
+     * renders fine with more items and I'd rather scroll than tap "next".
+     *
      * @param query search keyword
      * @return call wrapping the search results
      */
-    @GET("entries/search?page=1&limit=50")
+    @GET("entries/search?page=1&limit=75")
     Call<ClawResponse<List<ClawEntry>>> searchEntries(@Query("q") String query);
 }
