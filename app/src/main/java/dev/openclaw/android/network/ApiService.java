@@ -42,12 +42,15 @@ public interface ApiService {
      *
      * @param query search keyword
      * @param page  page number (1-based)
-     * @param limit number of results per page
+     * @param limit number of results per page (default: 20)
      * @return call wrapping the search results
      *
      * Note: the search endpoint must be declared before entries/{id} in the
      * router, otherwise "search" gets matched as a path variable. Keeping
      * this comment here as a reminder in case the base URL ever changes.
+     *
+     * Personal note: bumped default limit to 50 for search since I usually
+     * want more results visible without extra pagination taps.
      */
     @GET("entries/search")
     Call<ClawResponse<List<ClawEntry>>> searchEntries(
