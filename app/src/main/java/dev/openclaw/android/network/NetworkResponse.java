@@ -64,6 +64,18 @@ public class NetworkResponse<T> {
     }
 
     /**
+     * Creates an error response with only a message and no HTTP status code.
+     * Useful for non-HTTP errors like network timeouts or parsing failures.
+     *
+     * @param errorMessage A human-readable description of the error.
+     * @param <T>          The expected payload type (will be null).
+     * @return A {@link NetworkResponse} with {@link Status#ERROR} and errorCode -1.
+     */
+    public static <T> NetworkResponse<T> error(@NonNull String errorMessage) {
+        return new NetworkResponse<>(Status.ERROR, null, errorMessage, -1);
+    }
+
+    /**
      * Creates a loading response indicating an in-progress network call.
      *
      * @param <T> The expected payload type (will be null).
@@ -105,16 +117,5 @@ public class NetworkResponse<T> {
     /** @return {@code true} if a network call is currently in progress. */
     public boolean isLoading() {
         return status == Status.LOADING;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return "NetworkResponse{"
-                + "status=" + status
-                + ", errorCode=" + errorCode
-                + ", errorMessage='" + errorMessage + '\''
-                + ", data=" + data
-                + '}';
     }
 }
